@@ -42,8 +42,14 @@ pipeline {
             }
             post {
                 success {
+                    echo "Deploy CF stage success"
+        	        mail to:"steve.ho@ge.com", subject:"success: ${currentBuild.fullDisplayName}", body: "Cloud Foundry Deployment success"
                     archiveArtifacts 'dist/add2vals'
                 }
+                failure {
+					echo "Deploy CF stage failed"
+        	        mail to:"steve.ho@ge.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Cloud Foundry Deployment failed"
+				}
             }
         }
     }
