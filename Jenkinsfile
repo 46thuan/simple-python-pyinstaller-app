@@ -7,6 +7,7 @@ pipeline {
         stage('Build') { 
             agent {
                 docker {
+		    label 'dind'
                     image 'python:2-alpine' 
                 }
             }
@@ -18,6 +19,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
+		    label 'dind'
                     image 'qnib/pytest'
                 }
             }
@@ -34,6 +36,7 @@ pipeline {
         stage('Deliver') {
             agent {
                 docker {
+		    label 'dind'
                     image 'cdrx/pyinstaller-linux:python2'
                 }
             }
